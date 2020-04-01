@@ -1,0 +1,30 @@
+h2 {
+    font-size: 1.42rem;
+    margin-bottom: 0;
+    margin-top: 0;
+    overflow: hidden;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#header .secondary {
+    display: flex;
+    justify-content: space-between;
+}
+
+#header .secondary--button {
+    color: #1974E8;
+    border: 1px solid;
+    border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+    outline: none;
+    cursor: pointer;
+}
+
+h6 {
+    margin-bottom: 0.2rem;
+    margin-top: 0.2rem;
+    font-size: 0.85rem;
+    color: #666;
+    font-weight: 400;
+}

@@ -1,0 +1,23 @@
+.loader {
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader img {
+    animation: infinite 1s pulse;
+    padding: 20px;
+    transform-style: preserve-3d;
+    border-radius: 50%;
+}
+
+.loader .heading {
+    color: #1974E8;
+    font-size: 2rem;
+}
+
+.loader .loading {
+    color: #666;
+}

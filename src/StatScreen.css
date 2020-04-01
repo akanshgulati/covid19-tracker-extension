@@ -1,0 +1,64 @@
+.global-stats {
+    padding: 15px 0 10px;
+    margin: 0;
+}
+
+.global-stats .heading {
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+}
+
+.global-stats .line {
+    flex: 1;
+    height: 1px;
+    background: #EEEEEE;
+    margin-left: 5px;
+}
+
+.global-stats .info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.global-stats .cell .heading {
+    font-size: 10px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.global-stats .value {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+
+.global-stats .total.heading, .global-stats .total.value {
+    color: #666666;
+}
+
+.global-stats .active.heading, .global-stats .active.value {
+    color: #FC9F00;
+}
+
+.global-stats .recovered.heading, .global-stats .recovered.value {
+    color: #6DC764;
+}
+
+.global-stats .death.heading, .global-stats .death.value {
+    color: #FF3B3B;
+}
+
+button.add-more {
+    font-size: 0.85rem;
+    padding: 5px 10px;
+    border: 1px solid #EEEEEE;
+    border-radius: 4px;
+    color: #1974E8;
+    position: fixed;
+    top: 28px;
+    right: 10px;
+}

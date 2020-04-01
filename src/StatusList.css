@@ -1,0 +1,90 @@
+.status-list {
+    list-style: none;
+    padding: 0 24px;
+    margin: 0;
+}
+
+/*.status-list .container {*/
+/*    max-height: 250px;*/
+/*    overflow-y: scroll;*/
+/*}*/
+
+.status-list li, .status-list-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 5px 0;
+    padding: 10px 0;
+}
+
+.status-list li:not(:first-child) {
+    border-top: 1px solid #EEEEEE;
+}
+
+.status-list .title {
+    color: #666;
+}
+
+.status-list .orange {
+    color: #FC9F00;
+}
+
+.status-list .red {
+    color: #FF3B3B;
+}
+
+.status-list .green {
+    color: #6DC764;
+}
+
+.status-list .heading {
+    font-weight: 900;
+    background: #F9F8F3;
+    padding: 6px 5px;
+    font-size: 0.7rem;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.status-list .heading.region {
+    text-align: left;
+}
+
+.status-list .heading.active {
+    color: #FC9F00;
+}
+
+.status-list .heading.recovered {
+    color: #6DC764;
+}
+
+.status-list .heading.death {
+    color: #FF3B3B;
+}
+
+.status-list .active {
+    width: 24%;
+}
+
+.status-list .recovered, .status-list .death {
+    width: 20%;
+}
+
+.status-list .value.active, .status-list .value.recovered, .status-list .value.death {
+    text-align: right;
+}
+
+.status-list .value {
+    font-size: 0.9rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.status-list .region {
+    width: 32%;
+    color: #666666;
+}
+.status-list .today {
+    font-size: 0.85rem;
+}

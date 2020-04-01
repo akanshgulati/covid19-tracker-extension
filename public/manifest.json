@@ -1,0 +1,19 @@
+{
+  "author": "Akansh",
+  "browser_action": {
+    "default_icon": "icon-16.png",
+    "default_popup": "index.html"
+  },
+  "description": "A utility to provide updates on Covid-19 coronavirus cases",
+  "icons": {
+    "128": "icon-128.png",
+    "16": "icon-16.png",
+    "48": "icon-64.png"
+  },
+  "manifest_version": 3,
+  "name": "Covid-19 Tracker",
+  "permissions": [
+    "activeTab"
+  ],
+  "version": "2.0.0"
+}
