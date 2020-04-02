@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import CountrySelect from "./countrySelect";
-import {Remove, Get} from "./storageUtil";
+import {Remove, Get, Set} from "./storageUtil";
 import Header from "./header";
 import "./RegionScreen.css";
 
@@ -8,27 +8,30 @@ function RegionScreen(props) {
     const localRegions = Get("regions") ? Get("regions") : [];
     const [selectedRegions, setSelectedRegions] = useState(localRegions);
     
-    function onUpdate(e, values) {
+    function onUpdate(e, values, isRemove) {
         if (!values) {
             return;
         }
-        window.localStorage.setItem("regions", JSON.stringify(values));
+        Set("regions", JSON.stringify(values));
         setSelectedRegions(values);
-        setTimeout(() => {
-            document.querySelector(".container").scroll({
-                top: document.querySelector(".container").scrollHeight,
-                behavior: "smooth"
-            });
-        }, 100);
+        if (!isRemove) {
+            setTimeout(() => {
+                document.querySelector(".container").scroll({
+                    top: document.querySelector(".container").scrollHeight,
+                    behavior: "smooth"
+                });
+            }, 100);
+        }
     }
 
     function onRemove(index) {
         let newObject = JSON.parse(JSON.stringify(selectedRegions));
         newObject.splice(index, 1);
-        onUpdate(null, newObject);
+        onUpdate(null, newObject, true);
     }
 
-    const statButtonVisibility = selectedRegions && selectedRegions.length ? "visible" : "hidden";
+    const statButtonVisibility = selectedRegions && selectedRegions.length ? "block" : "none";
+    const defaultRegionVisibility = !selectedRegions || !selectedRegions.length ? "block" : "none";
     
     useEffect(() => {
         // remove stored stats;
@@ -44,10 +47,50 @@ function RegionScreen(props) {
             <div
                 className="selected-regions"
                 style={{
-                    visibility: statButtonVisibility
+                    display: defaultRegionVisibility
                 }}
             >
-                <div className="heading">Selected Regions ({selectedRegions.length})</div>
+                <div className="separator"><span className="line"/><span>OR</span><span className="line"/></div>
+                <div className="heading">Default Regions</div>
+                <div className="container">
+                    <div
+                        className="selected-region default"
+                        onClick={(e) => {
+                            const regions = props.locations.filter(location => location.isCountry);
+                            onUpdate(e, regions);
+                    }}>
+                        All Countries
+                    </div>
+                    <div className="selected-region default"onClick={(e) => {
+                        const regions = props.locations.filter(location => (location.isState && location.country === "US"));
+                        regions.unshift(props.locations.filter(location => (location.isCountry && location.code === "US"))[0]);
+                        onUpdate(e, regions);
+                    }}>
+                        USA states
+                    </div>
+                    <div className="selected-region default"onClick={(e) => {
+                        const regions = props.locations.filter(location => (location.isState && location.country === "IN"));
+                        regions.unshift(props.locations.filter(location => (location.isCountry && location.code === "IN"))[0]);
+                        onUpdate(e, regions);
+                    }}>
+                        Indian states
+                    </div>
+                </div>
+            </div>
+            <div
+                className="selected-regions"
+                style={{
+                    display: statButtonVisibility
+                }}
+            >
+                <div className="heading">
+                    Selected Regions ({selectedRegions.length})
+                    <span
+                        className="clear-all"
+                        onClick={(e) => {
+                            onUpdate(e, [], true);
+                        }}> Clear All</span>
+                </div>
                 <div className="container">
                     {selectedRegions.map((region, index) =>
                         <div key={index}

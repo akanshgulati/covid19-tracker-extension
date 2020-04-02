@@ -8,7 +8,7 @@ function statusList(props) {
                 {stats.map((stat, index) =>
                     <li key={index}>
                         <div className="value region">
-                            <div className="total bolder today">{props.format(stat.all.total)}</div>
+                            <div className="total today">{props.format(stat.all.total)}</div>
                             <div className="label">{stat.label}</div>
                         </div>
                         <div className="value active">

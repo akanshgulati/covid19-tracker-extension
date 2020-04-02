@@ -8,11 +8,11 @@ import FetchUtil from "./fetchUtil";
 import TimeUtil from "./TimeUtil";
 
 function formatNumber(number, symbol = "+", isDelta) {
-    if (!number) {
+    if (!number && isDelta) {
         return;
     }
     try {
-        if (number) {
+        if (Number.isFinite(number)) {
             return (isDelta ? symbol : "") + Number(number).toLocaleString();
         }
     } catch {
@@ -64,7 +64,7 @@ function StatScreen(props) {
                     className="sticky"
                     style={{padding: "16px 24px 0"}}>
                     <Header
-                        subHeading={"Last checked: " + TimeUtil.naturalTime(lastChecked)}
+                        subHeading={<small>Last checked: {TimeUtil.naturalTime(lastChecked)}</small>}
                         onChange={props.onChange}/>
                     <div className="global-stats">
                         <div className="heading">
@@ -103,8 +103,10 @@ function StatScreen(props) {
                     </div>
                 </div>
                 <StatusList stats={stats} format={formatNumber}/>
-                <button className="add-more" onClick={props.onChange}><span className="bolder">+</span> Add more
-                    regions
+                <button
+                    className="add-more"
+                    onClick={props.onChange}>
+                    Add<span style={{margin: "0 1px"}}>/</span>Edit regions
                 </button>
             </>
     )

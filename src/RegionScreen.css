@@ -19,8 +19,19 @@
 }
 
 .selected-regions .container {
-    max-height: 115px;
+    max-height: 142px;
     overflow: scroll;
+}
+
+.selected-regions .container::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 6px;
+}
+
+.selected-regions .container::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(72, 72, 72, 0.51);
+    -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
 }
 
 .selected-region {
@@ -34,19 +45,46 @@
     cursor: pointer;
 }
 
+.selected-region.default {
+    text-decoration: underline;
+}
+
+.selected-region.default:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+.separator {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+.separator .line {
+    height: 1px;
+    background: #EEEEEE;
+    margin: 5px;
+    flex: 1;
+}
 .remove {
     font-size: 0.8rem;
     color: #FF3B3B;
     float: right;
     opacity: 0;
-    transition: all 0.3s ease-out;
+    transition: all 0.3s ease-in;
+    transition-delay: 0s;
 }
 
 .selected-region:hover .remove {
     opacity: 1;
+    transition-delay: 1s;
     transition: all 0.2s linear;
 }
 
+.selected-regions .clear-all {
+    float: right;
+    cursor: pointer;
+}
 .done {
     background-color: #2f80ed;
     font-weight: 700;

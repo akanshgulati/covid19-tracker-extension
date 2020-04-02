@@ -1,5 +1,5 @@
 .loader {
-    min-height: 300px;
+    min-height: 400px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -8,16 +8,16 @@
 
 .loader img {
     animation: infinite 1s pulse;
-    padding: 20px;
-    transform-style: preserve-3d;
     border-radius: 50%;
+    box-shadow: 0 0 10px 3px rgba(128, 128, 128, 0.3);
 }
 
 .loader .heading {
-    color: #1974E8;
-    font-size: 2rem;
+    font-size: 1.3rem;
+    margin: 20px 0 25px;
 }
 
 .loader .loading {
     color: #666;
+    font-size: 1rem;
 }

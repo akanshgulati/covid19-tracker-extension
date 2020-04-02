@@ -50,6 +50,10 @@
     text-align: left;
 }
 
+.status-list .region .label {
+    font-size: 0.9rem;
+    color: #333;
+}
 .status-list .heading.active {
     color: #FC9F00;
 }
@@ -76,9 +80,6 @@
 
 .status-list .value {
     font-size: 0.9rem;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
 }
 
 .status-list .region {

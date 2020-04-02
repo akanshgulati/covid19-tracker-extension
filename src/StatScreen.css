@@ -55,10 +55,16 @@
 button.add-more {
     font-size: 0.85rem;
     padding: 5px 10px;
-    border: 1px solid #EEEEEE;
+    border: 1px solid rgba(25, 116, 232, 0.4);
     border-radius: 4px;
     color: #1974E8;
     position: fixed;
     top: 28px;
     right: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+button.add-more:hover {
+    border: 1px solid rgba(25, 116, 232, 1);
+    box-shadow: 0 0 2px 1px rgba(25, 116, 232, 0.2);
 }

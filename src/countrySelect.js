@@ -30,6 +30,9 @@ const useStyles = makeStyles({
             marginRight: 5,
             fontSize: "1rem",
         },
+    },
+    noOptions: {
+        fontSize: "0.8rem"
     }
 });
 
@@ -49,7 +52,10 @@ export default function CountrySelect(props) {
             filterSelectedOptions
             loading={props.isLoading}
             value={props.values ? props.values : []}
-            noOptionsText="No region found"
+            noOptionsText={props.noOption || "Only countries, US & Indian states list present"}
+            getOptionSelected={(option, value)=>{
+                return option.code === value.code;
+            }}
             getOptionLabel={(option) => option.label}
             renderOption={(option) => (
                 <>
@@ -66,9 +72,10 @@ export default function CountrySelect(props) {
                     {...params}
                     label="Choose a country/state"
                     variant="outlined"
+                    autoFocus={true}
                     inputProps={{
                         ...params.inputProps,
-                        autoComplete: 'new-password',
+                        autoComplete: 'off',
                     }}
                 />
             )}
