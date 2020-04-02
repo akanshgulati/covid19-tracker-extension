@@ -51,7 +51,7 @@ function RegionScreen(props) {
                 }}
             >
                 <div className="separator"><span className="line"/><span>OR</span><span className="line"/></div>
-                <div className="heading">Default Regions</div>
+                <div className="heading">Select Default Regions</div>
                 <div className="container">
                     <div
                         className="selected-region default"
