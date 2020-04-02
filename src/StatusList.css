@@ -2,12 +2,9 @@
     list-style: none;
     padding: 0 24px;
     margin: 0;
+    max-height: 400px;
+    overflow: scroll;
 }
-
-/*.status-list .container {*/
-/*    max-height: 250px;*/
-/*    overflow-y: scroll;*/
-/*}*/
 
 .status-list li, .status-list-heading {
     display: flex;

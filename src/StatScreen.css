@@ -20,7 +20,7 @@
 .global-stats .info {
     display: flex;
     justify-content: space-between;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
 .global-stats .cell .heading {
@@ -53,7 +53,7 @@
 }
 
 button.add-more {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     padding: 5px 10px;
     border: 1px solid rgba(25, 116, 232, 0.4);
     border-radius: 4px;

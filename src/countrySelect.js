@@ -52,7 +52,7 @@ export default function CountrySelect(props) {
             filterSelectedOptions
             loading={props.isLoading}
             value={props.values ? props.values : []}
-            noOptionsText={props.noOption || "Only countries, US & Indian states list present"}
+            noOptionsText={props.noOption || "No record found, select among country, US & Indian states."}
             getOptionSelected={(option, value)=>{
                 return option.code === value.code;
             }}
@@ -70,7 +70,7 @@ export default function CountrySelect(props) {
             renderInput={(params) => (
                 <TextField
                     {...params}
-                    label="Choose a country/state"
+                    label="Select countries or states"
                     variant="outlined"
                     autoFocus={true}
                     inputProps={{

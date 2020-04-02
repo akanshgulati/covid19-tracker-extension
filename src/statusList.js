@@ -2,9 +2,9 @@ import React from "react";
 import "./StatusList.css";
 
 function statusList(props) {
-    const stats = props.stats;
+    const stats = props.stats.sort((a, b) => b.all.total - a.all.total);
     return (
-            <ul className="status-list">
+            <ul className="status-list scroll-bar">
                 {stats.map((stat, index) =>
                     <li key={index}>
                         <div className="value region">

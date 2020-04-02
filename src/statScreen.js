@@ -40,17 +40,6 @@ function StatScreen(props) {
             setLastChecked(response.updated);
             setStats(result);
             setLoading(false);
-            [".sticky"].forEach(selector => {
-                const el = document.querySelector(selector);
-                if (!el) {
-                    return;
-                }
-                const top = el.getBoundingClientRect().top;
-                el.style.position = "sticky";
-                el.style.top = top + "px";
-                // el.style.top = 0;
-                el.style.backgroundColor = "white";
-            });
         };
         fetchStats();
 
@@ -93,8 +82,8 @@ function StatScreen(props) {
                     <div
                         className="status-list status-list-heading"
                         style={{
-                            margin: "0 -6px",
-                            padding: "10px 0"
+                            margin: "10px -6px 0",
+                            padding:"0"
                         }}>
                         <div className="heading region">REGION</div>
                         <div className="heading active">A</div>

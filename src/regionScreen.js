@@ -91,7 +91,7 @@ function RegionScreen(props) {
                             onUpdate(e, [], true);
                         }}> Clear All</span>
                 </div>
-                <div className="container">
+                <div className="container scroll-bar">
                     {selectedRegions.map((region, index) =>
                         <div key={index}
                              className="selected-region"
