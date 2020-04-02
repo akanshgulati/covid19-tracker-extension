@@ -5,22 +5,12 @@ import StatScreen from './statScreen.js'
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 import FetchUtil from "./fetchUtil";
 import {Get, Set} from "./storageUtil";
-
+/*global chrome*/
 const theme = createMuiTheme({
     typography: {
         fontFamily: 'Lato, sans-serif',
     }
 });
-
-export function GetLocations(props) {
-    const [data, setData] = useState(undefined);
-    const [error, setError] = useState(undefined);
-    if (!data && !error) {
-        FetchUtil.fetchLocations().then(setData).catch(setError);
-    }
-    data ? props.onSuccess(data.locations) : (error ? props.onError(error) : props.onLoading());
-    return <></>;
-}
 
 function App() {
     const localRegions = Get("regions") ? Get("regions") : [];
@@ -39,6 +29,13 @@ function App() {
             setLoading(false);
         };
         fetchData();
+        chrome.browserAction.setBadgeText({text: ''});
+        chrome.storage.local.get('stats', function ({stats}) {
+            const data = stats && JSON.parse(stats);
+            if (data) {
+                chrome.storage.local.set({currentCount: data.result.global.total});
+            }
+        });
     }, []);
     
     return (

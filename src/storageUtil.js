@@ -1,15 +1,20 @@
-export function Get(key) {
+/*global chrome*/
+export function Get(key, callback) {
     if (typeof key === "undefined") {
         return;
     }
+    const data = window.localStorage.getItem(key);
+    if (callback) {
+        chrome.storage.local.get(key, callback);
+    }
     try {
-        return JSON.parse(window.localStorage.getItem(key));
+        return JSON.parse(data);
     } catch {
-        return window.localStorage.getItem(key);
+        return data;
     }
 }
 
-export function Set(key, value) {
+export function Set(key, value, callback) {
     if (typeof key === "undefined" || typeof value === "undefined") {
         return;
     }
@@ -17,15 +22,20 @@ export function Set(key, value) {
         value = JSON.stringify(value);
     }
     window.localStorage.setItem(key, value);
+    chrome.storage.local.set({
+        [key]: value
+    }, callback);
 }
 
-export function Remove(key) {
+export function Remove(key, callback) {
     if (typeof key === "undefined") {
         return;
     }
     window.localStorage.removeItem(key);
+    chrome.storage.local.remove([key], callback);
 }
 
-export function Clear() {
+export function Clear(callback) {
     window.localStorage.clear();
+    chrome.storage.local.clear(callback);
 }

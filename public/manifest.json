@@ -1,7 +1,12 @@
 {
   "author": "Akansh",
   "browser_action": {
-    "default_icon": "icon-16.png",
+    "default_icon": {
+      "16": "icon-16.png",
+      "24": "icon-32.png",
+      "32": "icon-32.png"
+    },
+    "default_title": "COVID-19 Tracker",
     "default_popup": "index.html"
   },
   "description": "A utility to provide updates on Covid-19 coronavirus cases",
@@ -10,10 +15,15 @@
     "16": "icon-16.png",
     "48": "icon-64.png"
   },
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "Covid-19 Tracker",
   "permissions": [
-    "activeTab"
+    "alarms",
+    "storage",
+    "https://api.coronatrends.live/*"
   ],
-  "version": "2.0.0"
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "version": "1.0.0"
 }
