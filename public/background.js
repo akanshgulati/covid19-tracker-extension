@@ -6,7 +6,7 @@ var URLS = {
 
 function shorten(n, d) {
     if (n < 1000) {
-        return n;
+        return n + '';
     }
     if (n > 1e7) {
         return "10M+"
@@ -27,7 +27,6 @@ chrome.browserAction.setBadgeBackgroundColor({
 chrome.alarms.onAlarm.addListener(onAlarm);
 
 async function onAlarm(alarm) {
-    debugger;
     if (!alarm || alarm.name !== "checkStats") {
         return;
     }
@@ -37,7 +36,7 @@ async function onAlarm(alarm) {
         const localStats = stats && JSON.parse(stats);
         // check after 3 minutes
         // 180000
-        if (localStats && localStats.result && (now - localStats.timestamp) > 1) {
+        if (localStats && localStats.result) {
 
             chrome.storage.local.get(['regions', 'currentCount'], async function ({regions, currentCount}) {
                 const _regions = regions && JSON.parse(regions);
@@ -73,7 +72,7 @@ async function onAlarm(alarm) {
 
                 if (currentCount && +currentCount < stats.global.total || !currentCount) {
                     const delta = currentCount ? stats.global.total - currentCount : stats.global.total;
-                    const displayText = JSON.stringify(shorten(delta, 1));
+                    const displayText = shorten(delta, 1);
                     chrome.browserAction.setBadgeText({text: displayText}, function () {
                         chrome.storage.local.set({currentCount: stats.global.total})
                     });
