@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import './App.css';
+import '../css/App.css';
 import RegionScreen from './regionScreen.js'
 import StatScreen from './statScreen.js'
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
-import FetchUtil from "./fetchUtil";
-import {Get, Set} from "./storageUtil";
+import FetchUtil from "../utils/fetchUtil";
+import {Get, Set} from "../utils/storageUtil";
 /*global chrome*/
 const theme = createMuiTheme({
     typography: {
@@ -33,7 +33,7 @@ function App() {
         chrome.storage.local.get('stats', function ({stats}) {
             const data = stats && JSON.parse(stats);
             if (data) {
-                chrome.storage.local.set({currentCount: data.result.global.total});
+                chrome.storage.local.set({seenCount: data.result.global.total});
             }
         });
     }, []);

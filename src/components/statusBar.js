@@ -1,5 +1,5 @@
 import React from "react";
-import "./StatusBar.css"
+import "../css/StatusBar.css"
 function statusBar(props) {
     if (!props.total) {
         return null;

@@ -1,26 +1,41 @@
 {
   "name": "covid-extension",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
+  "keywords": [
+    "browser extension",
+    "chrome extension",
+    "firefox extension",
+    "covid"
+  ],
+  "main": "src/index.js",
   "dependencies": {
     "@material-ui/core": "^4.9.8",
     "@material-ui/lab": "^4.0.0-alpha.47",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-dom": "^16.13.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "INLINE_RUNTIME_CHUNK=false GENERATE_SOURCEMAP=false react-scripts build",
+    "start": "BROWSER=none react-scripts start",
+    "build-chrome": "npm-run-all build:* copy:chrome",
+    "build-firefox": "npm-run-all build:* copy:firefox",
+    "build:app": "INLINE_RUNTIME_CHUNK=false GENERATE_SOURCEMAP=false react-scripts build",
+    "build:bg": "webpack --mode production ./src/background/index.js --output ./build/background.js",
+    "copy:chrome": "cp -R chrome/* build",
+    "copy:firefox": "cp -R firefox/* build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "watch": "react-scripts watch"
+    "watch": "react-scripts watch",
+    "zip": "npm-run-all zip:*",
+    "zip:build": "cd build; zip -r ../build.zip * -x '*.DS_Store'",
+    "zip:src": "zip -r src.zip src package.json README.md public -x '*.DS_Store'"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "env": {
+      "browser": true,
+      "webextensions": true
+    }
   },
   "browserslist": {
     "production": [
@@ -33,5 +48,17 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.3.11",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "npm-run-all": "^4.1.5",
+    "react-scripts": "3.4.1"
+  },
+  "engines": {
+    "node": ">=12.14.0",
+    "yarn": ">=1.19.1"
   }
 }

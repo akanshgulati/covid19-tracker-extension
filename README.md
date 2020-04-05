@@ -1,68 +1,49 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# COVID-19 Tracker
 
-## Available Scripts
+A popup extension to see Coronavirus infected patients around the globe. Currently, you can check all countries, Indian states and US states data.
 
-In the project directory, you can run:
+<img src="assets/1400x560.jpg" width="100%"/>
 
-### `npm start`
+## Tech Stack  
+ 
+ - Using **React** `^16.13.1`
+ - Using [Webpack 4](https://webpack.js.org/) and [react-scripts](https://www.npmjs.com/package/react-scripts) for compiling and bundling both popup and background script code.
+ - Web-ext for linting firefox plugin
+ - Using Yarn for package management
+ - Node version - `12.14.0` and Yarn version - `1.19.1`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## File Structure  
+- Firefox Directory (/firefox): It contains all files for Firefox plugin  
+- Chrome Directory (/chrome): It contains all files for Chrome plugin  
+- Static Directory (/public): It contains common static files used in Chrome and Firefox plugins.  
+- Src directory (/src): It contains all files related to React for popup script and background script (background.js)
+- 
+## Development Process  
+> In order to use below build processes, you must have **Yarn** and **Node** installed on your machine. 
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Use command `yarn` to install React and other essential packages to build
 
-### `npm test`
+## Build Process  
+  
+1. **Development Build** :  `yarn start`  
+2. **Production Build**: `yarn run chrome-build` (Chrome) & `yarn run firefox-build` (Firefox)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Third Party Resources
+1. React Framework
+2. Material UI for React
+3. "Lato" font by Google fonts
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Feature Pipeline
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+ - [ ] Add trend graph
+ - [ ] Add Indian district data
+ - [ ] Add Other countries' states data
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Support 
+You can add your feedback, suggestions, feature request at [here](https://coronatrends.live/support.html?source=github).
 
-### `npm run eject`
+## Dev & Design
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+ - [Akansh](https://twitter.com/akanshgulati) - Development
+ - [Chhaviraj](https://twitter.com/chhaviraj) - Design & UX

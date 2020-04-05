@@ -1,5 +1,5 @@
 import React from "react";
-import "./Tab.css"
+import "../css/Tab.css"
 
 function tab(props) {
     return (

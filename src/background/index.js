@@ -23,7 +23,7 @@ chrome.alarms.create("checkStats", {delayInMinutes: 5, periodInMinutes: 10});
 chrome.browserAction.setBadgeBackgroundColor({
     color: "#FF3B3B"
 });
-
+chrome.runtime.setUninstallURL("https://coronatrends.live/support.html?reason=uninstall");
 chrome.alarms.onAlarm.addListener(onAlarm);
 
 async function onAlarm(alarm) {
@@ -38,7 +38,7 @@ async function onAlarm(alarm) {
         // 180000
         if (localStats && localStats.result) {
 
-            chrome.storage.local.get(['regions', 'currentCount'], async function ({regions, currentCount}) {
+            chrome.storage.local.get(['regions', 'seenCount'], async function ({regions, seenCount}) {
                 const _regions = regions && JSON.parse(regions);
                 if (!_regions || !_regions.length) {
                     return;
@@ -69,13 +69,11 @@ async function onAlarm(alarm) {
                     result: stats,
                     timestamp: now
                 }));
-
-                if (currentCount && +currentCount < stats.global.total || !currentCount) {
-                    const delta = currentCount ? stats.global.total - currentCount : stats.global.total;
+                seenCount = +seenCount;
+                if (stats.global && stats.global.total && seenCount && seenCount < stats.global.total) {
+                    const delta = stats.global.total - seenCount;
                     const displayText = shorten(delta, 1);
-                    chrome.browserAction.setBadgeText({text: displayText}, function () {
-                        chrome.storage.local.set({currentCount: stats.global.total})
-                    });
+                    chrome.browserAction.setBadgeText({text: displayText});
                 }
             });
         }

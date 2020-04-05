@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import CountrySelect from "./countrySelect";
-import {Remove, Get, Set} from "./storageUtil";
+import {Remove, Get, Set} from "../utils//storageUtil";
 import Header from "./header";
-import "./RegionScreen.css";
+import "../css/RegionScreen.css";
 
 function RegionScreen(props) {
     const localRegions = Get("regions") ? Get("regions") : [];

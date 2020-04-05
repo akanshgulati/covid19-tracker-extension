@@ -3,9 +3,9 @@ import Header from "./header";
 import StatusList from "./statusList";
 import Loader from "./loader";
 
-import "./StatScreen.css"
-import FetchUtil from "./fetchUtil";
-import TimeUtil from "./TimeUtil";
+import "../css/StatScreen.css"
+import FetchUtil from "../utils/fetchUtil";
+import TimeUtil from "../utils/TimeUtil";
 
 function formatNumber(number, symbol = "+", isDelta) {
     if (!number && isDelta) {

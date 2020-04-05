@@ -1,5 +1,5 @@
 import React from "react";
-import "./StatusList.css";
+import "../css/StatusList.css";
 
 function statusList(props) {
     const stats = props.stats.sort((a, b) => b.all.total - a.all.total);
