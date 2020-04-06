@@ -1,6 +1,6 @@
 {
   "name": "Covid-19 Tracker",
-  "description": "Personalized experience on new tabs for better productivity",
+  "description": "A utility to provide updates on Covid-19 coronavirus cases",
   "version": "1.0.0",
   "browser_action": {
     "default_icon": {
