@@ -53,8 +53,8 @@ export default function CountrySelect(props) {
             loading={props.isLoading}
             value={props.values ? props.values : []}
             noOptionsText={props.noOption || "No record found, select among country, US & Indian states."}
-            getOptionSelected={(option, value)=>{
-                return option.code === value.code;
+            getOptionSelected={(option, selectedOption) => {
+                return option.value === selectedOption.value;
             }}
             getOptionLabel={(option) => option.label}
             renderOption={(option) => (
