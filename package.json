@@ -28,7 +28,7 @@
     "watch": "react-scripts watch",
     "zip": "npm-run-all zip:*",
     "zip:build": "cd build; zip -r ../extension.zip * -x '*.DS_Store' service-worker.js asset-manifest.json *.txt;",
-    "zip:src": "zip -r source-files.zip src firefox chrome public package.json *.lock *.md -x '*.DS_Store'",
+    "zip:src": "zip -r source-files.zip src firefox chrome public package.json assets *.lock *.md -x '*.DS_Store'",
     "release-firefox": "npm-run-all build-firefox zip:*",
     "release-chrome": "npm-run-all build-chrome zip:*"
   },
