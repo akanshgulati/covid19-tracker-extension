@@ -1,0 +1,40 @@
+.flex {
+    display: flex;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.justify-around {
+    justify-content: space-around;
+}
+
+.align-middle {
+    align-items: center;
+}
+
+.align-start {
+    align-items: flex-start;
+    text-align: start;
+}
+
+.mar-0 {
+    margin: 0;
+}
+
+.bold {
+    font-weight: 500;
+}
+
+.bolder {
+    font-weight: 900;
+}
+
+.cursor {
+    cursor: pointer;
+}

@@ -36,6 +36,7 @@ function RegionScreen(props) {
     useEffect(() => {
         // remove stored stats;
         Remove("stats");
+        Remove("historicData");
     }, []);
     return (
         <div className="region-screen">
