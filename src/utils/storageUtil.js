@@ -1,5 +1,5 @@
 /*global chrome*/
-const isChromeLocalStorage = chrome && chrome.local;
+const isChromeLocalStorage = chrome && chrome.storage;
 
 export function Get(key, callback) {
     if (typeof key === 'undefined') {

@@ -69,8 +69,8 @@ async function onAlarm(alarm) {
                     result: stats,
                     timestamp: now
                 }));
-                seenCount = +seenCount;
                 if (stats.global && stats.global.total && seenCount && seenCount < stats.global.total) {
+                    seenCount = +seenCount;
                     const delta = stats.global.total - seenCount;
                     const displayText = shorten(delta, 1);
                     chrome.browserAction.setBadgeText({text: displayText});
