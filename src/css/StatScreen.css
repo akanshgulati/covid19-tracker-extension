@@ -40,6 +40,10 @@
     color: #666666;
 }
 
+.global-stats .total1.heading, .global-stats .total1.value {
+    color: #A76000;
+}
+
 .global-stats .active.heading, .global-stats .active.value {
     color: #FC9F00;
 }

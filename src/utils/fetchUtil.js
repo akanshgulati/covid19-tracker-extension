@@ -3,7 +3,8 @@ import {Get, Set} from "./storageUtil";
 const URLS = {
     base: "https://api.coronatrends.live",
     location: "/get/locations",
-    stat: "/get/stats"
+    stat: "/get/stats",
+    historic: "/get/historic"
 };
 
 const API = {
@@ -40,6 +41,31 @@ const API = {
         Set('stats', {
             result: stats,
             timestamp: now
+        });
+        return stats;
+    },
+    async fetchHistoricData(regions) {
+        const localStats = Get('historic-stats');
+        const now = +new Date();
+        const regionHash = window.btoa(JSON.stringify(regions));
+        
+        if (localStats && localStats.result && (now - localStats.timestamp < 1800000) && regionHash === localStats.hash) {
+            return localStats.result;
+        }
+
+        const values = regions.map(region => region.value);
+        const stats = await fetch(URLS.base + URLS.historic, {
+            method: "POST",
+            body: JSON.stringify({locations: values}),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(resp => resp.json());
+        
+        Set('historic-stats', {
+            result: stats,
+            timestamp: now,
+            hash: regionHash
         });
         return stats;
     }

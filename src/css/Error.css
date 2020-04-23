@@ -1,0 +1,25 @@
+.error-screen {
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-message {
+    color: var(--red);
+    font-size: 1.3rem;
+    margin: 10px;
+}
+
+.error-select {
+    color: var(--blue);
+    border: 1px solid var(--blue);
+    padding: 5px 20px;
+    border-radius: 4px;
+    margin: 20px 0;
+}
+
+.error-heading {
+    font-size: 2rem;
+}

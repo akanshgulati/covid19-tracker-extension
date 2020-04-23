@@ -2,11 +2,12 @@
     list-style: none;
     padding: 0 24px;
     margin: 0;
-    max-height: 400px;
+    max-height: 345px;
     overflow: scroll;
 }
 
-.status-list li, .status-list-heading {
+.status-list li,
+.status-list-heading {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -19,7 +20,7 @@
 }
 
 .status-list li:not(:first-child) {
-    border-top: 1px solid #EEEEEE;
+    border-top: 1px solid #eeeeee;
 }
 
 .status-list .title {
@@ -27,20 +28,24 @@
 }
 
 .status-list .orange {
-    color: #FC9F00;
+    color: #fc9f00;
+}
+
+.status-list .brown {
+    color: #a76000;
 }
 
 .status-list .red {
-    color: #FF3B3B;
+    color: #ff3b3b;
 }
 
 .status-list .green {
-    color: #6DC764;
+    color: #6dc764;
 }
 
 .status-list .heading {
     font-weight: 900;
-    background: #F9F8F3;
+    background: #f9f8f3;
     padding: 6px 5px;
     font-size: 0.7rem;
     text-align: center;
@@ -55,27 +60,37 @@
     font-size: 0.9rem;
     color: #333;
 }
+
+.status-list .heading.total1 {
+    color: #a76000;
+}
+
 .status-list .heading.active {
-    color: #FC9F00;
+    color: #fc9f00;
 }
 
 .status-list .heading.recovered {
-    color: #6DC764;
+    color: #6dc764;
 }
 
 .status-list .heading.death {
-    color: #FF3B3B;
+    color: #ff3b3b;
 }
 
-.status-list .active {
-    width: 24%;
+.status-list .active,
+.status-list .total1 {
+    width: 20.5%;
 }
 
-.status-list .recovered, .status-list .death {
-    width: 20%;
+.status-list .recovered,
+.status-list .death {
+    width: 16%;
 }
 
-.status-list .value.active, .status-list .value.recovered, .status-list .value.death {
+.status-list .value.active,
+.status-list .value.recovered,
+.status-list .value.total1,
+.status-list .value.death {
     text-align: right;
 }
 
@@ -84,9 +99,24 @@
 }
 
 .status-list .region {
-    width: 32%;
+    width: 25%;
     color: #666666;
 }
+
 .status-list .today {
     font-size: 0.85rem;
+}
+
+.checkbox {
+    opacity: 0;
+    transition: all 0.2s ease-in;
+    margin-right: 4px;
+    margin-left: -18px;
+    width: 14px;
+    height: 14px;
+}
+
+.checkbox.show {
+    opacity: 1;
+    transition: all 0.2s ease-out;
 }

@@ -1,0 +1,26 @@
+.inline {
+    display: inline-block;
+}
+
+.status-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.status-bar .bar {
+    height: 15px;
+    border-radius: 2px;
+}
+
+.status-bar .orange {
+    background-color: #FC9F00;
+}
+
+.status-bar .red {
+    background-color: #FF3B3B;
+}
+
+.status-bar .green {
+    background-color: #6DC764;
+}

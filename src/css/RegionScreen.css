@@ -55,6 +55,7 @@
     text-decoration: none;
     color: #2f80ed;
 }
+
 .separator {
     display: flex;
     justify-content: center;
@@ -62,12 +63,14 @@
     color: #666;
     font-size: 0.9rem;
 }
+
 .separator .line {
     height: 1px;
     background: #EEEEEE;
     margin: 5px;
     flex: 1;
 }
+
 .remove {
     font-size: 0.8rem;
     color: #FF3B3B;
@@ -87,6 +90,7 @@
     float: right;
     cursor: pointer;
 }
+
 .done {
     background-color: #2f80ed;
     font-weight: 700;
@@ -95,8 +99,14 @@
     margin-top: 20px;
     width: 100%;
     border-radius: 4px;
+    font-size: 1.1rem;
+    transition: all 0.3s linear;
 }
 
 .done:hover {
     box-shadow: 0 0 2px 2px rgba(47, 128, 237, 0.3);
+}
+
+#region-screen .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: #1974e8;
 }

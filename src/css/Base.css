@@ -1,0 +1,53 @@
+:root {
+    --blue: #1974e8;
+    --red: #ff3b3b;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.justify-around {
+    justify-content: space-around;
+}
+
+.align-middle {
+    align-items: center;
+}
+
+.align-start {
+    align-items: flex-start;
+    text-align: start;
+}
+
+.mar-0 {
+    margin: 0;
+}
+
+.bold {
+    font-weight: 500;
+}
+
+.bolder {
+    font-weight: 900;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.underline {
+    text-decoration: underline;
+}

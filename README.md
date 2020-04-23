@@ -26,7 +26,7 @@ Use command `yarn` to install React and other essential packages to build
 ## Build Process  
   
 1. **Development Build** :  `yarn start`  
-2. **Production Build**: `yarn run chrome-build` (Chrome) & `yarn run firefox-build` (Firefox)
+2. **Production Build**: `yarn run build-chrome` (Chrome) & `yarn run build-firefox` (Firefox)
 
 
 ## Third Party Resources
