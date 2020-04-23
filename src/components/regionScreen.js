@@ -31,7 +31,7 @@ function RegionScreen(props) {
     }
 
     const statButtonVisibility = selectedRegions && selectedRegions.length ? 'block' : 'none';
-    const defaultRegionVisibility = !selectedRegions || !selectedRegions.length ? 'block' : 'none';
+    const defaultRegionVisibility = !selectedRegions || !selectedRegions.length && !props.isLoading ? 'block' : 'none';
 
     useEffect(() => {
         // remove stored stats;
@@ -136,7 +136,7 @@ function RegionScreen(props) {
             <div style={{ textAlign: 'center' }}>
                 <button
                     style={{
-                        visibility: statButtonVisibility,
+                        display: statButtonVisibility,
                     }}
                     className='done'
                     onClick={() => {
