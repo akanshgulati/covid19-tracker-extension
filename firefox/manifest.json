@@ -1,7 +1,7 @@
 {
   "name": "Covid-19 Tracker",
   "description": "A utility to provide updates on Covid-19 coronavirus infected cases globally and state-wise",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "browser_action": {
     "default_icon": {
       "16": "icons/icon-16.png",
