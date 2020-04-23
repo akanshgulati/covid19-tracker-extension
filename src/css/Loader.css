@@ -21,3 +21,11 @@
     color: #666;
     font-size: 1rem;
 }
+
+.loader .button {
+    border: 1px solid var(--blue);
+    padding: 5px 10px;
+    font-size: 1rem;
+    color: var(--blue);
+    border-radius: 4px;
+}

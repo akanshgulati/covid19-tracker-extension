@@ -45,10 +45,11 @@ const API = {
         return stats;
     },
     async fetchHistoricData(regions) {
-        const localStats = Get('historicStats');
+        const localStats = Get('historic-stats');
         const now = +new Date();
-
-        if (localStats && localStats.result && (now - localStats.timestamp < 1800000)) {
+        const regionHash = window.btoa(JSON.stringify(regions));
+        
+        if (localStats && localStats.result && (now - localStats.timestamp < 1800000) && regionHash === localStats.hash) {
             return localStats.result;
         }
 
@@ -60,9 +61,11 @@ const API = {
                 "Content-Type": "application/json"
             }
         }).then(resp => resp.json());
-        Set('historicStats', {
+        
+        Set('historic-stats', {
             result: stats,
-            timestamp: now
+            timestamp: now,
+            hash: regionHash
         });
         return stats;
     }

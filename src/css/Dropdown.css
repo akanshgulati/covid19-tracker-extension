@@ -1,3 +1,14 @@
-.MuiSelect-selectMenu:focus {
+#chart-screen .MuiSelect-selectMenu:focus {
     background: none !important;
+}
+
+.MuiMenuItem-root {
+    line-height: 1.5rem !important;
+    font-size: 0.9rem !important;
+    padding: 4px 16px !important;
+    min-height: auto !important;
+}
+
+#chart-screen .MuiSelect-root {
+    font-size: 0.9rem;
 }

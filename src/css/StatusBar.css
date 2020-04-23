@@ -1,26 +1,31 @@
-.inline {
-    display: inline-block;
-}
-
 .status-bar {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+    padding: 10px 24px;
+    text-align: center;
+    border-top: 1px solid #cccccc4f;
 }
 
-.status-bar .bar {
-    height: 15px;
-    border-radius: 2px;
+.status-bar svg#graph {
+    margin-right: 15px;
 }
 
-.status-bar .orange {
-    background-color: #FC9F00;
+.text {
+    transition: color 0.3s ease-in-out;
 }
 
-.status-bar .red {
-    background-color: #FF3B3B;
+.status-bar:hover svg#graph {
+    stroke: #1974e8;
+    cursor: pointer;
 }
 
-.status-bar .green {
-    background-color: #6DC764;
+.status-bar:hover .text {
+    color: #1974e8;
+    cursor: pointer;
+}
+
+.status-bar .blue {
+    color: #1974e8;
+}
+.status-bar .arrow {
+    font-size: 1.1em;
+    margin: 0 5px;
 }

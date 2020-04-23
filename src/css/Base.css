@@ -1,5 +1,14 @@
+:root {
+    --blue: #1974e8;
+    --red: #ff3b3b;
+}
+
 .flex {
     display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
 }
 
 .justify-center {
@@ -35,6 +44,10 @@
     font-weight: 900;
 }
 
-.cursor {
+.pointer {
     cursor: pointer;
+}
+
+.underline {
+    text-decoration: underline;
 }

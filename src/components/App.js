@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import '../css/Base.css';
 import '../css/App.css';
 import RegionScreen from './regionScreen.js';
 import StatScreen from './statScreen.js';
@@ -15,6 +16,7 @@ const theme = createMuiTheme({
 
 function App() {
     const localRegions = Get('regions') ? Get('regions') : [];
+    const localChartRegions = Get('chart-regions') ? Get('chart-regions') : [];
     const localScreen = Get('screen') && localRegions ? Get('screen') : 'regions';
     const [screen, setScreen] = useState(localScreen);
     const [locations, setLocations] = useState([]);
@@ -22,6 +24,7 @@ function App() {
     const [isLoading, setLoading] = useState(true);
 
     const [regions, setRegions] = useState(localRegions);
+    const [chartRegions, setChartRegions] = useState(localChartRegions);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -53,8 +56,8 @@ function App() {
                         onUpdate={(regions) => {
                             if (regions) {
                                 setRegions(regions);
-                                setScreen('chart');
-                                Set('screen', 'chart');
+                                setScreen('stats');
+                                Set('screen', 'stats');
                             }
                         }}
                     />
@@ -63,9 +66,15 @@ function App() {
                 )}
                 {screen === 'stats' ? (
                     <StatScreen
-                        onChange={() => {
+                        onSelectRegionScreen={() => {
                             setScreen('regions');
                             Set('screen', 'regions');
+                        }}
+                        onSelectChartScreen={(regions) => {
+                            setChartRegions(regions);
+                            Set('chart-regions', regions);
+                            Set('screen', 'chart');
+                            setTimeout(() => setScreen('chart'), 100);
                         }}
                         regions={regions}
                     />
@@ -75,10 +84,10 @@ function App() {
                 {screen === 'chart' ? (
                     <ChartScreen
                         onChange={() => {
-                            setScreen('regions');
-                            Set('screen', 'regions');
+                            setScreen('stats');
+                            Set('screen', 'stats');
                         }}
-                        regions={regions}
+                        regions={chartRegions}
                     />
                 ) : (
                     ''

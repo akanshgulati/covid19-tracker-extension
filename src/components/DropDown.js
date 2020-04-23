@@ -1,5 +1,5 @@
-import React, {forwardRef} from 'react';
-import {FormControl, Select, MenuItem} from "@material-ui/core";
+import React, { forwardRef } from 'react';
+import { FormControl, Select, MenuItem } from '@material-ui/core';
 import '../css/Dropdown.css';
 
 const DropDown = forwardRef((props, ref) => {
@@ -10,21 +10,25 @@ const DropDown = forwardRef((props, ref) => {
     };
     return (
         <FormControl ref={ref}>
-            
             <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
+                labelId='demo-simple-select-label'
+                id='demo-simple-select'
                 value={currentValue}
                 disableUnderline={true}
-                onChange={handleChange}
-            >
+                onChange={handleChange}>
                 {props.items.map((item, _index) => {
-                    return <MenuItem key={_index} value={item.value}>{item.label}</MenuItem>;
+                    return (
+                        <MenuItem
+                            key={_index}
+                            value={item.value}>
+                            {item.label}
+                        </MenuItem>
+                    );
                 })}
                 )
             </Select>
         </FormControl>
-    )
+    );
 });
 
 export default DropDown;
