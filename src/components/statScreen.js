@@ -3,11 +3,10 @@ import Header from './header';
 import StatusList from './statusList';
 import Loader from './loader';
 import StatusBar from './statusBar';
-import { Set } from '../utils/storageUtil';
 import '../css/StatScreen.css';
 import FetchUtil from '../utils/fetchUtil';
 import TimeUtil from '../utils/TimeUtil';
-const MAX_SELECTION = 1000;
+const MAX_SELECTION = 7;
 function formatNumber(number, symbol = '+', isDelta) {
     if (!number && isDelta) {
         return;
@@ -30,32 +29,53 @@ function StatScreen(props) {
     const [showCheckbox, setCheckbox] = useState(false);
     const [selectedChartRegions, setChartRegions] = useState([]);
     const [selectedChartRegionsValue, setChartRegionsValue] = useState([]);
+    const [districtMode, setDistrictMode] = useState(null);
+    const [loadingDistrictStats, setLoadingDistrictStats] = useState(null);
+    const [stateName, setStateName] = useState(null);
 
     useEffect(() => {
-        const fetchStats = async () => {
-            const response = await FetchUtil.fetchStats(props.regions);
-            const map = new Map();
-            let hasHistoricalData = false;
-            response.locations.forEach((item) => {
-                map.set(item.code, item);
-                if (item.hasHistoricData) {
-                    hasHistoricalData = true;
-                }
-            });
-            if (!hasHistoricalData) {
-                setStatusBarScreen('disabled');
-            }
-            setGlobalStat(response.global);
-            const result = [];
-            props.regions.forEach((region) => {
-                result.push(map.get(region.value));
-            });
-            setLastChecked(response.updated);
-            setStats(result);
-            setLoading(false);
-        };
         fetchStats();
     }, []);
+    
+    const fetchStats = async () => {
+        const response = await FetchUtil.fetchStats(props.regions);
+        const map = new Map();
+        let hasHistoricalData = false;
+        response.locations.forEach((item) => {
+            map.set(item.code, item);
+            if (item.hasHistoricData) {
+                hasHistoricalData = true;
+            }
+        });
+        if (!hasHistoricalData) {
+            setStatusBarScreen('disabled');
+        }
+        setGlobalStat(response.global);
+        const result = [];
+        props.regions.forEach((region) => {
+            result.push(map.get(region.value));
+        });
+        setLastChecked(response.updated);
+        setStats(result);
+        setLoading(false);
+    };
+
+    const fetchDistrictStats = async (districtCode)=> {
+        setLoadingDistrictStats(districtCode);
+        let hasHistoricalData = false;
+        const response = await FetchUtil.fetchDistrictData(districtCode);
+        setLoadingDistrictStats(null);
+        response.locations.forEach((item) => {
+            if (item.hasHistoricData) {
+                hasHistoricalData = true;
+            }
+        });
+        if (!hasHistoricalData) {
+            setStatusBarScreen('disabled');
+        }
+        setStats(response.locations);
+        setDistrictMode(districtCode);
+    }
 
     const statusBarClick = (value) => {
         switch (value) {
@@ -93,6 +113,31 @@ function StatScreen(props) {
         setChartRegionsValue(_selectedRegionsValue);
     };
 
+    const resetDistrictMode = ()=> {
+        setDistrictMode(null);
+        setCheckbox(false);
+        setLoadingDistrictStats(null);
+        setStatusBarScreen('stat-screen');
+        setChartRegions([]);
+        setChartRegionsValue([]);
+        fetchStats();
+    }
+
+    const onDistrictView = (code) => {
+        if (!code || code.includes("unknown")) {
+            resetDistrictMode();
+            return;
+        }
+        const stateData = stats.find(stat => stat.code === code);
+        if (stateData) {
+            setGlobalStat(stateData.all);
+            setStateName(stateData.label);
+        }
+        fetchDistrictStats(code).catch(err =>{
+            resetDistrictMode();
+        });
+    }
+
     return isLoading ? (
         <Loader />
     ) : (
@@ -103,8 +148,8 @@ function StatScreen(props) {
                 />
                 <div className='global-stats'>
                     <div className='heading'>
-                        <div>Global Stats</div>
-                        <div className='line'></div>
+                        <div>{districtMode ? stateName : "Global Stats"}</div>
+                        <div className='line'/>
                     </div>
                     <div className='info'>
                         <div className='cell'>
@@ -127,13 +172,18 @@ function StatScreen(props) {
                         </div>
                     </div>
                 </div>
+                {districtMode ? <div className="flex align-middle back-district pointer" onClick={resetDistrictMode}>
+                    <span className="arrow" style={{marginRight: "3px"}}>←</span> 
+                    Back to Stats Home
+                    <div className="line"/>
+                </div> : ""}
                 <div
                     className='status-list status-list-heading'
                     style={{
                         margin: '10px -6px 0',
                         padding: '0',
                     }}>
-                    <div className='heading region'>REGION</div>
+                    <div className='heading region'>{districtMode ? "DISTRICT" : "REGION"}</div>
                     <div className='heading total1'>T</div>
                     <div className='heading active'>A</div>
                     <div className='heading recovered'>R</div>
@@ -146,13 +196,17 @@ function StatScreen(props) {
                 isSelectionMode={showCheckbox}
                 checkedIndex={selectedChartRegionsValue}
                 onCheckboxClick={onCheckboxClick}
+                onDistrictViewSelect={onDistrictView}
+                loadingDistrictStats={loadingDistrictStats}
+                districtCode={districtMode}
             />
             <button className='add-more' onClick={props.onSelectRegionScreen}>
-                Add<span style={{ margin: '0 1px' }}>/</span>Edit regions
+                Add<span style={{margin: '0 1px'}}>/</span>Edit regions
             </button>
             <StatusBar
                 onClick={statusBarClick}
                 screen={statusBarScreen}
+                max={MAX_SELECTION}
                 selectedChartRegions={selectedChartRegions}
             />
         </>

@@ -87,7 +87,7 @@ export default function StatusBar(props) {
                         </div>
                     ) : (
                         <div className='text blue' onClick={() => props.onClick('chart-screen')}>
-                            See graphical view ({props.selectedChartRegions.length}/7){' '}
+                            See graphical view ({props.selectedChartRegions.length}/{props.max}){' '}
                             <span className='arrow'>→</span>
                         </div>
                     )}

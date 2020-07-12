@@ -9,13 +9,57 @@ function statusList(props) {
             {stats.map((stat, index) => (
                 <li key={index}>
                     <div
-                        className={'value region flex align-middle' + (props.isSelectionMode && stat.hasHistoricData ? ' pointer' : '')}
-                        onClick={() => stat.hasHistoricData && props.onCheckboxClick(stat.code)}>
+                        className={
+                            'value region flex align-middle' +
+                            (props.isSelectionMode && stat.hasHistoricData ? ' pointer' : '')
+                        }
+                        onClick={(event) => {
+                            event.stopPropagation();
+                            stat.hasHistoricData && props.onCheckboxClick(stat.code)
+                        }}>
                         {/*<div className="total today">{props.format(stat.all.total)}</div>*/}
-                        <div className={'checkbox' + (props.isSelectionMode && stat.hasHistoricData ? ' show' : '')}>
-                            <Checkbox isChecked={props.checkedIndex.includes(stat.code)}/>
+                        <div
+                            className={
+                                'checkbox' +
+                                (props.isSelectionMode && stat.hasHistoricData ? ' show' : '')
+                            }>
+                            <Checkbox isChecked={props.checkedIndex.includes(stat.code)} />
                         </div>
-                        <div className='label'>{stat.label}</div>
+                        <div className='label'>
+                            {stat.hasDistrictInfo && !props.isSelectionMode ? (
+                                <>
+                                    {!props.loadingDistrictStats ? (
+                                        <div
+                                            className='district-info pointer'
+                                            onClick={(event) => {
+                                                event.stopPropagation();
+                                                props.onDistrictViewSelect(stat.code)
+                                            }}>
+                                            {' '}
+                                            District View
+                                            <span className='arrow' style={{ marginLeft: '3px' }}>
+                                                →
+                                            </span>
+                                        </div>
+                                    ) : (
+                                        ''
+                                    )}
+                                    {props.loadingDistrictStats &&
+                                    props.loadingDistrictStats === stat.code ? (
+                                        <div className='spinner'>
+                                            <div className='bounce1' />
+                                            <div className='bounce2' />
+                                            <div className='bounce3' />
+                                        </div>
+                                    ) : (
+                                        ''
+                                    )}
+                                </>
+                            ) : (
+                                ''
+                            )}
+                            {stat.label}
+                        </div>
                     </div>
                     <div className='value total1'>
                         <div className='today brown bolder'>

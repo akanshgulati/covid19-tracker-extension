@@ -4,7 +4,8 @@ const URLS = {
     base: "https://api.coronatrends.live",
     location: "/get/locations",
     stat: "/get/stats",
-    historic: "/get/historic"
+    historic: "/get/historic",
+    district: "/get/district-wise/"
 };
 
 const API = {
@@ -63,6 +64,26 @@ const API = {
         }).then(resp => resp.json());
         
         Set('historic-stats', {
+            result: stats,
+            timestamp: now,
+            hash: regionHash
+        });
+        return stats;
+    },
+    async fetchDistrictData(districtCode) {
+        const localStats = Get('district-stats_' + districtCode);
+        const now = +new Date();
+        const regionHash = districtCode;
+
+        if (localStats && localStats.result && (now - localStats.timestamp < 1800000) && regionHash === localStats.hash) {
+            return localStats.result;
+        }
+        
+        const stats = await fetch(URLS.base + URLS.district + districtCode, {
+            method: "GET"
+        }).then(resp => resp.json());
+
+        Set('district-stats_'+ districtCode, {
             result: stats,
             timestamp: now,
             hash: regionHash

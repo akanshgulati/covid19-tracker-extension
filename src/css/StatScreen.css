@@ -10,7 +10,7 @@
     align-items: center;
 }
 
-.global-stats .line {
+.global-stats .line, .back-district .line {
     flex: 1;
     height: 1px;
     background: #EEEEEE;
@@ -71,4 +71,10 @@ button.add-more {
 button.add-more:hover {
     border: 1px solid rgba(25, 116, 232, 1);
     box-shadow: 0 0 2px 1px rgba(25, 116, 232, 0.2);
+}
+.back-district {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1974E8;
+    margin: 10px 0 15px;
 }
