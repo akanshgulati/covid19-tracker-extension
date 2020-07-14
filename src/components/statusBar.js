@@ -27,7 +27,7 @@ export default function StatusBar(props) {
                         />
                     </svg>
                     <span>
-                        <small>Historical data not available for selected regions</small>
+                        <small>Historical data not available for current regions</small>
                     </span>
                 </div>
             ) : (

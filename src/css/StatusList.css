@@ -107,7 +107,9 @@
 .status-list .today {
     font-size: 0.85rem;
 }
-
+.status-list .total {
+    cursor: default;
+}
 .checkbox {
     opacity: 0;
     transition: all 0.2s ease-in;

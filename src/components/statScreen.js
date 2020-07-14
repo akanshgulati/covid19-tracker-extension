@@ -6,6 +6,9 @@ import StatusBar from './statusBar';
 import '../css/StatScreen.css';
 import FetchUtil from '../utils/fetchUtil';
 import TimeUtil from '../utils/TimeUtil';
+import { SwitchTransition, CSSTransition } from 'react-transition-group';
+import NumberUtil from '../utils/numberUtil';
+
 const MAX_SELECTION = 7;
 function formatNumber(number, symbol = '+', isDelta) {
     if (!number && isDelta) {
@@ -13,7 +16,13 @@ function formatNumber(number, symbol = '+', isDelta) {
     }
     try {
         if (Number.isFinite(number)) {
-            return (isDelta ? symbol : '') + Number(number).toLocaleString();
+            if (isDelta) {
+                return symbol + Number(Math.abs(number)).toLocaleString();
+            } else if (Number(number) > 1e6) {
+                return NumberUtil.shorten(Number(number), 2);
+            } else {
+                return Number(number).toLocaleString();
+            }
         }
     } catch {
         return (isDelta ? symbol : '') + number;
@@ -60,7 +69,7 @@ function StatScreen(props) {
         setLoading(false);
     };
 
-    const fetchDistrictStats = async (districtCode)=> {
+    const fetchDistrictStats = async (districtCode) => {
         setLoadingDistrictStats(districtCode);
         let hasHistoricalData = false;
         const response = await FetchUtil.fetchDistrictData(districtCode);
@@ -75,7 +84,16 @@ function StatScreen(props) {
         }
         setStats(response.locations);
         setDistrictMode(districtCode);
-    }
+        setTimeout(() => {
+            const list = document.querySelector('.status-list.scroll-bar');
+            if (list) {
+                list.scrollTo({
+                    top: 0,
+                    behaviour: 'smooth',
+                });
+            }
+        });
+    };
 
     const statusBarClick = (value) => {
         switch (value) {
@@ -113,7 +131,7 @@ function StatScreen(props) {
         setChartRegionsValue(_selectedRegionsValue);
     };
 
-    const resetDistrictMode = ()=> {
+    const resetDistrictMode = () => {
         setDistrictMode(null);
         setCheckbox(false);
         setLoadingDistrictStats(null);
@@ -121,22 +139,22 @@ function StatScreen(props) {
         setChartRegions([]);
         setChartRegionsValue([]);
         fetchStats();
-    }
+    };
 
     const onDistrictView = (code) => {
-        if (!code || code.includes("unknown")) {
+        if (!code || code.includes('unknown')) {
             resetDistrictMode();
             return;
         }
-        const stateData = stats.find(stat => stat.code === code);
+        const stateData = stats.find((stat) => stat.code === code);
         if (stateData) {
             setGlobalStat(stateData.all);
             setStateName(stateData.label);
         }
-        fetchDistrictStats(code).catch(err =>{
+        fetchDistrictStats(code).catch((err) => {
             resetDistrictMode();
         });
-    }
+    };
 
     return isLoading ? (
         <Loader />
@@ -148,8 +166,16 @@ function StatScreen(props) {
                 />
                 <div className='global-stats'>
                     <div className='heading'>
-                        <div>{districtMode ? stateName : "Global Stats"}</div>
-                        <div className='line'/>
+                        <SwitchTransition mode="out-in">
+                            <CSSTransition
+                                in={true}
+                                classNames='fade'
+                                timeout={{appear: 500, enter: 500, exit: 100}}
+                                key={districtMode ? stateName : 'global'}>
+                                <div>{districtMode ? stateName : 'Global Stats'}</div>
+                            </CSSTransition>
+                        </SwitchTransition>
+                        <div className='line' />
                     </div>
                     <div className='info'>
                         <div className='cell'>
@@ -172,18 +198,26 @@ function StatScreen(props) {
                         </div>
                     </div>
                 </div>
-                {districtMode ? <div className="flex align-middle back-district pointer" onClick={resetDistrictMode}>
-                    <span className="arrow" style={{marginRight: "3px"}}>←</span> 
-                    Back to Stats Home
-                    <div className="line"/>
-                </div> : ""}
+                {districtMode ? (
+                    <div
+                        className='flex align-middle back-district pointer'
+                        onClick={resetDistrictMode}>
+                        <span className='arrow' style={{ marginRight: '3px' }}>
+                            ←
+                        </span>
+                        Back
+                        <div className='line' />
+                    </div>
+                ) : (
+                    ''
+                )}
                 <div
                     className='status-list status-list-heading'
                     style={{
                         margin: '10px -6px 0',
                         padding: '0',
                     }}>
-                    <div className='heading region'>{districtMode ? "DISTRICT" : "REGION"}</div>
+                    <div className='heading region'>{districtMode ? 'DISTRICT' : 'REGION'}</div>
                     <div className='heading total1'>T</div>
                     <div className='heading active'>A</div>
                     <div className='heading recovered'>R</div>
@@ -198,10 +232,11 @@ function StatScreen(props) {
                 onCheckboxClick={onCheckboxClick}
                 onDistrictViewSelect={onDistrictView}
                 loadingDistrictStats={loadingDistrictStats}
+                humanise={NumberUtil.humanise}
                 districtCode={districtMode}
             />
             <button className='add-more' onClick={props.onSelectRegionScreen}>
-                Add<span style={{margin: '0 1px'}}>/</span>Edit regions
+                Add<span style={{ margin: '0 1px' }}>/</span>Edit regions
             </button>
             <StatusBar
                 onClick={statusBarClick}
