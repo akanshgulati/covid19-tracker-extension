@@ -5,13 +5,14 @@ import {CSSTransition, SwitchTransition} from "react-transition-group";
 
 function statusList(props) {
     const stats = props.stats.sort((a, b) => b.all.total - a.all.total);
-    const statsHash = stats.length + stats && stats[0];
+    const statsHash = stats && stats.length && btoa(JSON.stringify(stats[0]));
     return (
         <SwitchTransition mode="out-in">
             <CSSTransition
                 in={true}
                 key={statsHash}
                 classNames='fade'
+                unmountOnExit
                 timeout={{appear: 500, enter: 500, exit: 100}}
             >
                 <ul className='status-list scroll-bar'>
