@@ -100,13 +100,16 @@
 
 .status-list .region {
     width: 25%;
+    user-select: none;
     color: #666666;
 }
 
 .status-list .today {
     font-size: 0.85rem;
 }
-
+.status-list .total {
+    cursor: default;
+}
 .checkbox {
     opacity: 0;
     transition: all 0.2s ease-in;
@@ -119,4 +122,47 @@
 .checkbox.show {
     opacity: 1;
     transition: all 0.2s ease-out;
+}
+.district-info {
+    font-size: 0.7rem;
+    margin-bottom: 2px;
+    color: var(--blue);
+}
+
+.spinner {
+    width: 100%;
+    text-align: center;
+}
+
+.spinner > div {
+    width: 9px;
+    height: 9px;
+    margin-right: 5px;
+    border-radius: 100%;
+    display: inline-block;
+    animation: loader-bounce 1.4s infinite ease-in-out both;
+}
+
+.spinner .bounce1 {
+    animation-delay: -0.32s;
+    background-color: #FC9F00;
+}
+
+.spinner .bounce2 {
+    animation-delay: -0.16s;
+    background-color: #6dc764;
+}
+
+.spinner .bounce3 {
+    background-color: #ff3b3b;
+}
+
+@keyframes loader-bounce {
+    0%, 80%, 100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    } 40% {
+          -webkit-transform: scale(1.0);
+          transform: scale(1.0);
+      }
 }

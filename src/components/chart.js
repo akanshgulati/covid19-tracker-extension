@@ -1,19 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
+import NumberUtil from "../utils/numberUtil";
 import Chart from 'chart.js';
-
-function shorten(n, d) {
-    if (n < 1000) {
-        return n + '';
-    }
-    if (n > 1e7) {
-        return "10M+"
-    }
-    var x = ('' + n).length;
-    var p = Math.pow;
-    d = p(10, d);
-    x -= x % 3;
-    return Math.round(n * d / p(10, x)) / d + " KMBTPE"[x / 3];
-}
 
 function customToolTip(tooltipModel) {
     // Tooltip Element
@@ -134,7 +121,7 @@ function Charting(props) {
                                 beginAtZero: false,
                                 autoSkipPadding: 10,
                                 callback(value, index, values) {
-                                    return shorten(value, 1);
+                                    return NumberUtil.shorten(value, 1);
                                 }
                             },
                             gridLines: {
