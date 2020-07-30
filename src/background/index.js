@@ -1,3 +1,5 @@
+import {Get, Set} from "../utils/storageUtil";
+
 var URLS = {
     base: "https://api.coronatrends.live",
     location: "/get/locations",
@@ -80,3 +82,25 @@ async function onAlarm(alarm) {
     });
 }
 
+chrome.runtime.onInstalled.addListener(function (details) {
+    const now = +new Date();
+    if (details && details.reason && details.reason === 'install') {
+        if (!Get("review_seen")) {
+            // 5 days
+            Set("review_seen", now + 432000000);
+        }
+        if (!Get("share_seen")) {
+            // 10 days
+            Set("share_seen", now + 864000000);
+        }
+    } else if (details && details.reason && details.reason === 'update') {
+        // 10 min. 
+        if (!Get("review_seen")) {
+            Set("review_seen", now + 600000);
+        }
+        // 5 days 
+        if (!Get("share_seen")) {
+            Set("share_seen", now + 432000000);
+        }
+    }
+});

@@ -1,6 +1,9 @@
 :root {
     --blue: #1974e8;
     --red: #ff3b3b;
+    --lightBlack: #666666;
+    --black: #333;
+    --animate-duration: 1s;
 }
 
 .flex {
@@ -68,4 +71,22 @@
 .fade-exit-active {
     opacity: 0;
     transition: opacity 0.1s linear;
+}
+
+.fade-slow-appear, .fade-slow-enter {
+    opacity: 0.01;
+}
+
+.fade-slow-appear-active, .fade-slow-enter-active {
+    opacity: 1;
+    transition: opacity 750ms linear;
+}
+
+.fade-slow-exit {
+    opacity: 1;
+}
+
+.fade-slow-exit-active {
+    opacity: 0;
+    transition: opacity 750ms linear;
 }

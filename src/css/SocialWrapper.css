@@ -1,0 +1,179 @@
+.social-popup {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.social-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+}
+
+.social-wrapper {
+    user-select: none;
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 20px;
+    background: white;
+    overflow: hidden;
+    padding-bottom: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.social-bg {
+    background: url('../images/rate-bg.jpg') top no-repeat;
+    background-size: cover;
+    height: 200px;
+    width: 100%;
+}
+
+.share-bg {
+    background: url('../images/share-bg.jpg') top no-repeat;
+    background-size: cover;
+    height: 130px;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.social-heading {
+    font-size: 20px;
+    text-align: center;
+    color: var(--black);
+}
+
+.social-subheading {
+    font-size: 16px;
+    text-align: center;
+    margin: 10px 30px 40px;
+    color: var(--lightBlack);
+    line-height: 22px;
+}
+
+
+.social-chrome {
+    background: var(--blue);
+    color: white;
+}
+
+.social-twitter {
+    background: #1DA1F2;
+    color: white;
+}
+
+.social-facebook {
+    background: #4267B2;
+    color: white;
+}
+
+.social-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+.social-buttons button {
+    padding: 10px 20px;
+    border-radius: 25px;
+    filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.10));
+    transition: all 0.2s ease-in;
+}
+.social-buttons button:hover {
+    filter: drop-shadow(0px 3px 5px rgba(0, 0, 0, 0.50));
+}
+
+.social-close {
+    text-align: center;
+    font-size: 12px;
+    color: var(--lightBlack);
+    margin-top: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.social-close:hover {
+    color: var(--black);
+}
+
+@keyframes bounceIn {
+    from,
+    20%,
+    40%,
+    60%,
+    80%,
+    to {
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    0% {
+        opacity: 0;
+        transform: scale3d(0.3, 0.3, 0.3);
+    }
+
+    20% {
+        transform: scale3d(1.1, 1.1, 1.1);
+    }
+
+    40% {
+        transform: scale3d(0.9, 0.9, 0.9);
+    }
+
+    60% {
+        opacity: 1;
+        transform: scale3d(1.03, 1.03, 1.03);
+    }
+
+    80% {
+        transform: scale3d(0.97, 0.97, 0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+.bounceIn {
+    animation-duration: calc(var(--animate-duration) * 0.75);
+    animation-name: bounceIn;
+}
+
+@keyframes bounceOut {
+    20% {
+        transform: scale3d(0.9, 0.9, 0.9);
+    }
+
+    50%,
+    55% {
+        opacity: 1;
+        transform: scale3d(1.1, 1.1, 1.1);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale3d(0.3, 0.3, 0.3);
+    }
+}
+
+.bounceOut {
+    animation-duration: var(--animate-duration);
+    animation-name: bounceOut;
+}
+
+.bounce-enter-active, .bounce-appear-active {
+    animation-name: bounceIn;
+    animation-duration: calc(var(--animate-duration) * 0.70);
+}
+
+.bounce-exit-active {
+    animation-name: bounceOut;
+    animation-duration: 750ms;
+}
