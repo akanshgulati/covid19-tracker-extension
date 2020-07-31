@@ -4,6 +4,7 @@ import '../css/App.css';
 import RegionScreen from './regionScreen.js';
 import StatScreen from './statScreen.js';
 import ChartScreen from './chartScreen.js';
+import ShareWrapper from './socialWrapper.js';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import FetchUtil from '../utils/fetchUtil';
 import { Get, Set } from '../utils/storageUtil';
@@ -48,6 +49,7 @@ function App() {
 
     return (
         <ThemeProvider theme={theme}>
+            <ShareWrapper/>
             <div className='App'>
                 {screen === 'regions' ? (
                     <RegionScreen
